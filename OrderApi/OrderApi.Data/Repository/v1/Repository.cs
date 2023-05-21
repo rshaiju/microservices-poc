@@ -1,31 +1,24 @@
-﻿using CustomerApi.Data.Database;
-using CustomerApi.Domain.Entities;
-using Microsoft.Toolkit.Diagnostics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Toolkit.Diagnostics;
+using OrderApi.Data.Database;
 
-namespace CustomerApi.Data.Repository.v1
+namespace OrderApi.Data.Repository.v1
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, new()
     {
-        protected readonly CustomerContext customerContext;
+        protected readonly OrderContext orderContext;
 
-        public Repository(CustomerContext customerContext)
+        public Repository(OrderContext orderContext)
         {
-            this.customerContext = customerContext;
+            this.orderContext = orderContext;
         }
         public async Task<TEntity> AddAsync(TEntity entity)
         {
             Guard.IsNotNull(entity, nameof(entity));
 
             try
-            { 
-                await customerContext.AddAsync(entity);
-                await customerContext.SaveChangesAsync();
+            {
+                await orderContext.AddAsync(entity);
+                await orderContext.SaveChangesAsync();
                 return entity;
             }
             catch (Exception)
@@ -39,7 +32,7 @@ namespace CustomerApi.Data.Repository.v1
         {
             try
             {
-                return customerContext.Set<TEntity>();
+                return orderContext.Set<TEntity>();
             }
             catch (Exception)
             {
@@ -54,14 +47,28 @@ namespace CustomerApi.Data.Repository.v1
 
             try
             {
-                customerContext.Update(entity);
-                await customerContext.SaveChangesAsync();
+                orderContext.Update(entity);
+                await orderContext.SaveChangesAsync();
                 return entity;
             }
             catch (Exception)
             {
 
                 throw new Exception("Error updating entity");
+            }
+        }
+
+        public async Task UpdateRangeAsync(List<TEntity> entities)
+        {
+            try
+            {
+                orderContext.UpdateRange(entities);
+                await orderContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("Error updating entities");
             }
         }
     }

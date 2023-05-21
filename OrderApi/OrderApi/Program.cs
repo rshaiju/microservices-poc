@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using OrderApi.Data.Database;
+using OrderApi.Data.Repository.v1;
+using OrderApi.Service.v1.Command;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +21,11 @@ builder.Services.AddSwaggerGen(c => {
 
     });
 });
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddMediatR(c => { c.RegisterServicesFromAssemblies(typeof(CreateOrderCommand).Assembly); });
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddDbContext<OrderContext>(options => { options.UseInMemoryDatabase("OrdersDB"); });
 
 var app = builder.Build();
 

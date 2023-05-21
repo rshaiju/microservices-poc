@@ -7,23 +7,28 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi", "CustomerApi\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi.Service", "CustomerApi.Service\CustomerApi.Service.csproj", "{632033E4-4478-4CE0-9618-AE19442A8A1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi.Messaging.Send", "CustomerApi.Messaging.Send\CustomerApi.Messaging.Send.csproj", "{0CFF825C-D106-4E2C-97F5-20D8A0BA3875}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi.Messaging.Send", "CustomerApi.Messaging.Send\CustomerApi.Messaging.Send.csproj", "{0CFF825C-D106-4E2C-97F5-20D8A0BA3875}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi.Domain", "CustomerApi.Domain\CustomerApi.Domain.csproj", "{C42B35B8-4799-4248-9059-3A301BBA6FD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi.Domain", "CustomerApi.Domain\CustomerApi.Domain.csproj", "{C42B35B8-4799-4248-9059-3A301BBA6FD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi.Database", "CustomerApi.Database\CustomerApi.Database.csproj", "{1280E172-074F-422E-8575-72013D3D7493}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi.Database", "CustomerApi.Database\CustomerApi.Database.csproj", "{1280E172-074F-422E-8575-72013D3D7493}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi.Database.Build", "CustomerApi.Database.Build\CustomerApi.Database.Build.csproj", "{9922414B-EEDE-4B8D-81FE-67EE9694F270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi.Database.Build", "CustomerApi.Database.Build\CustomerApi.Database.Build.csproj", "{9922414B-EEDE-4B8D-81FE-67EE9694F270}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi.Data", "CustomerApi.Data\CustomerApi.Data.csproj", "{ED3AB008-A81F-44F4-9DE4-268685BEA6D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi.Data", "CustomerApi.Data\CustomerApi.Data.csproj", "{ED3AB008-A81F-44F4-9DE4-268685BEA6D6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6494CC9C-29B6-411C-A248-F6370AE9D3AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi.Test", "Tests\CustomerApi.Test\CustomerApi.Test.csproj", "{920C9A5E-EA6E-444E-92FF-60D0B74F17F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi.Test", "Tests\CustomerApi.Test\CustomerApi.Test.csproj", "{920C9A5E-EA6E-444E-92FF-60D0B74F17F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi.Service.Test", "Tests\CustomerApi.Service.Test\CustomerApi.Service.Test.csproj", "{AAD98291-F7F5-4338-AD7E-0FAD8173A9F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi.Service.Test", "Tests\CustomerApi.Service.Test\CustomerApi.Service.Test.csproj", "{AAD98291-F7F5-4338-AD7E-0FAD8173A9F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi.Data.Test", "Tests\CustomerApi.Data.Test\CustomerApi.Data.Test.csproj", "{B599E89F-4A7C-406B-8E7D-77E358AE7823}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApi.Data.Test", "Tests\CustomerApi.Data.Test\CustomerApi.Data.Test.csproj", "{B599E89F-4A7C-406B-8E7D-77E358AE7823}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D81C2216-1538-479A-ADFD-34718CAF48D5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

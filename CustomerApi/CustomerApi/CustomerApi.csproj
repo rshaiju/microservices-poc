@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CustomerApi.Domain\CustomerApi.Domain.csproj" />
+    <ProjectReference Include="..\CustomerApi.Messaging.Send\CustomerApi.Messaging.Send.csproj" />
     <ProjectReference Include="..\CustomerApi.Service\CustomerApi.Service.csproj" />
   </ItemGroup>
 

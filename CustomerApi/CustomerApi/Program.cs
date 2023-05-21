@@ -1,9 +1,9 @@
 using CustomerApi.Data.Database;
 using CustomerApi.Data.Repository.v1;
-using CustomerApi.Models.v1;
+using CustomerApi.Messaging.Send.Options.v1;
+using CustomerApi.Messaging.Send.Sender.v1;
 using CustomerApi.Service.v1.Command;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHealthChecks();
 builder.Services.AddOptions();
 
+var rabbitMqServiceConfig = builder.Configuration.GetSection("RabbitMq");
+builder.Services.Configure<RabbitMqConfiguration>(rabbitMqServiceConfig);
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -33,6 +35,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMediatR(c => { c.RegisterServicesFromAssemblies(typeof(CreateCustomerCommand).Assembly); });
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddDbContext<CustomerContext>(options=> { options.UseInMemoryDatabase("CustomerDB"); });
+
+builder.Services.AddSingleton<ICustomerUpdateSender,CustomerUpdateSender>();
 
 var app = builder.Build();
 

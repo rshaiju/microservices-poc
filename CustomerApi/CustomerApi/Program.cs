@@ -1,6 +1,16 @@
+using CustomerApi.Data.Database;
+using CustomerApi.Data.Repository.v1;
+using CustomerApi.Models.v1;
+using CustomerApi.Service.v1.Command;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddHealthChecks();
+builder.Services.AddOptions();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -18,6 +28,11 @@ builder.Services.AddSwaggerGen(c => {
 
     });
 });
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddMediatR(c => { c.RegisterServicesFromAssemblies(typeof(CreateCustomerCommand).Assembly); });
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddDbContext<CustomerContext>(options=> { options.UseInMemoryDatabase("CustomerDB"); });
 
 var app = builder.Build();
 

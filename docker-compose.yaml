@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  customer-api:
+    image: customerapi:latest
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "https://+:443;http://+:80"
+      ASPNETCORE_HTTPS_PORT: 7001
+      ASPNETCORE_Kestrel__Certificates__Default__Password: shaiju123
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /dev-certs/certificate.pfx
+      RabbitMq__HostName: my-rabbitmq
+    ports:
+    - 7000:80
+    - 7001:443
+    networks:
+    - shaijus
+    volumes:
+    - type: bind
+      source: D:/dev-certs
+      target: /dev-certs
+    depends_on:
+      rabbit-mq:
+        condition: service_started
+  order-api:
+    image: orderapi:latest
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "https://+:443;http://+:80"
+      ASPNETCORE_HTTPS_PORT: 7006
+      ASPNETCORE_Kestrel__Certificates__Default__Password: shaiju123
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /dev-certs/certificate.pfx
+      RabbitMq__HostName: my-rabbitmq
+    ports:
+    - 7005:80
+    - 7006:443
+    networks:
+    - shaijus
+    volumes:
+    - type: bind
+      source: D:/dev-certs
+      target: /dev-certs
+    depends_on:
+      rabbit-mq:
+          condition: service_started
+  rabbit-mq:
+    image: rabbitmq:3-management
+    hostname: my-rabbitmq
+    networks:
+    - shaijus
+    ports:
+    - 8080:15672
+    - 5672:5672
+
+networks:
+  shaijus:
+

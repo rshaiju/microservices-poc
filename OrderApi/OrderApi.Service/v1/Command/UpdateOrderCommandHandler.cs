@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using OrderApi.Data.Repository.v1;
 using OrderApi.Domain.Entities;
 using System;
@@ -11,16 +12,21 @@ namespace OrderApi.Service.v1.Command
 {
     public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
     {
-        private readonly IOrderRepository orderRepository;
+        private readonly IServiceProvider serviceProvider;
 
-        public UpdateOrderCommandHandler(IOrderRepository orderRepository)
+        public UpdateOrderCommandHandler(IServiceProvider serviceProvider)
         {
-            this.orderRepository = orderRepository;
+            this.serviceProvider = serviceProvider;
         }
 
         public async Task Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
-            await orderRepository.UpdateRangeAsync(request.Orders);
+            using (IServiceScope scope = serviceProvider.CreateScope())
+            {
+                var orderRepository = scope.ServiceProvider.GetService<IOrderRepository>();
+                await orderRepository.UpdateRangeAsync(request.Orders);
+            }
+                
         }
     }
 }

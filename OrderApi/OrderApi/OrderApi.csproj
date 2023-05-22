@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OrderApi.Domain\OrderApi.Domain.csproj" />
+    <ProjectReference Include="..\OrderApi.Messaging.Receive\OrderApi.Messaging.Receive.csproj" />
     <ProjectReference Include="..\OrderApi.Service\OrderApi.Service.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using OrderApi.Data.Repository.v1;
 using OrderApi.Domain.Entities;
 using System;
@@ -11,15 +12,20 @@ namespace OrderApi.Service.v1.Query
 {
     public class GetOrdersByCustomerIdQueryHandler : IRequestHandler<GetOrdersByCustomerIdQuery, List<Order>>
     {
-        private readonly IOrderRepository orderRepository;
+        private readonly IServiceProvider serviceProvider;
 
-        public GetOrdersByCustomerIdQueryHandler(IOrderRepository orderRepository)
+        public GetOrdersByCustomerIdQueryHandler( IServiceProvider serviceProvider)
         {
-            this.orderRepository = orderRepository;
+            this.serviceProvider = serviceProvider;
         }
         public async Task<List<Order>> Handle(GetOrdersByCustomerIdQuery request, CancellationToken cancellationToken)
         {
-            return await orderRepository.GetOrdersByCustomerIdAsync(request.CustomerId, cancellationToken);
+            using (IServiceScope scope = serviceProvider.CreateScope())
+            {
+                IOrderRepository orderRepository = scope.ServiceProvider.GetService<IOrderRepository>();
+                return await orderRepository.GetOrdersByCustomerIdAsync(request.CustomerId, cancellationToken);
+            }
+                
         }
     }
 }

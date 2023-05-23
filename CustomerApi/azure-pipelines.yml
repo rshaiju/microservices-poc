@@ -1,0 +1,38 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - CustomerApi/*
+ 
+pool:
+  vmImage: 'ubuntu-latest'
+ 
+variables:
+  imageName: customer-api
+  dockerFile: ./CustomerApi/CustomerApi/Dockerfile
+  buildContext: ./CustomerApi
+ 
+stages:
+  - stage: ImageBuild
+    displayName: Build and push docker image
+    jobs:
+    - job: BuildImageAndPush
+      displayName: Build and push docker image
+      steps:
+      - task: Docker@2
+        displayName: Build and Push Docker Image
+        inputs:
+          buildContext: $(buildContext)
+          command: buildAndPush
+          Dockerfile: $(dockerFile)
+          containerRegistry: 'shaijus-registry'
+          repository: customer-api
+          tags: |
+            $(Build.BuildId)
+            latest
+            
+
+          
+          
